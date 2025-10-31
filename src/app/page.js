@@ -1,65 +1,242 @@
-import Image from "next/image";
+"use client";
+import Navbar from "./components/Navbar";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="bg-[var(--background)] dark:bg-[var(--background-dark)] text-[var(--foreground)] dark:text-[var(--foreground-dark)] font-sans transition-all duration-300">
+      <Navbar />
+
+      {/* 🏠 Home Section */}
+      <section
+        id="home"
+        className="min-h-screen flex flex-col justify-center items-center text-center px-6"
+      >
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 text-[var(--accent-dark)] dark:text-[var(--accent-light)]">
+          Hi, I'm Jaideep 👋
+        </h1>
+        <p className="text-lg md:text-xl max-w-2xl leading-relaxed opacity-80">
+          Cloud & AI/ML Enthusiast | Full Stack Developer | Lifelong Learner
+        </p>
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <a
+            href="#about"
+            className="border border-[var(--accent-dark)] dark:border-[var(--accent-light)] text-[var(--accent-dark)] dark:text-[var(--accent-light)] px-6 py-3 rounded-xl hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition-all"
+          >
+            About Me
+          </a>
+          <a
+            href="#projects"
+            className="border border-[var(--accent-dark)] dark:border-[var(--accent-light)] text-[var(--accent-dark)] dark:text-[var(--accent-light)] px-6 py-3 rounded-xl hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition-all"
+          >
+            View My Projects
+          </a>
+          <a
+            href="#contact"
+            className="border border-[var(--accent-dark)] dark:border-[var(--accent-light)] text-[var(--accent-dark)] dark:text-[var(--accent-light)] px-6 py-3 rounded-xl hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition-all"
+          >
+            Contact Me
+          </a>
+        </div>
+      </section>
+
+      {/* 🙋 About Section */}
+      <section
+        id="about"
+        className="px-6 py-20 bg-[var(--primary-light)]/40 dark:bg-[var(--primary-dark)]/20"
+      >
+        <h2 className="text-4xl font-bold text-center mb-8 text-[var(--accent-dark)] dark:text-[var(--accent-light)]">
+          About Me
+        </h2>
+        <div className="max-w-4xl mx-auto text-lg leading-relaxed text-center opacity-90">
+          <p>
+            I'm a B.Tech CSE student passionate about building intelligent systems and scalable cloud solutions.
+            I enjoy working on projects involving <b>AI, ML, Cloud, and Full Stack Development</b>.
+            My focus is on creating clean, efficient, and user-centric applications that solve real-world problems.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* ⚙️ Skills Section */}
+      <section
+        id="skills"
+        className="min-h-[80vh] px-6 py-20 bg-[var(--primary-light)]/40 dark:bg-[var(--primary-dark)]/20"
+      >
+        <h2 className="text-4xl font-bold text-center mb-12 text-[var(--accent-dark)] dark:text-[var(--accent-light)]">
+          Skills
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
+          {[
+            { title: "Cloud & DevOps", items: ["AWS", "Docker", "CI/CD", "EC2", "S3", "Lambda"] },
+            { title: "AI / ML", items: ["Python", "Pandas", "Scikit-learn", "TensorFlow", "OpenCV"] },
+            { title: "Web Development", items: ["Next.js", "React", "Flask", "Node.js", "Tailwind CSS"] },
+          ].map((s, i) => (
+            <div
+              key={i}
+              className="bg-[var(--primary-light)] dark:bg-[var(--primary-dark)] p-6 rounded-2xl shadow-md hover:shadow-lg transition-all border border-[var(--accent-light)]/30"
+            >
+              <h3 className="text-2xl font-semibold text-[var(--accent-dark)] dark:text-[var(--accent-light)] mb-4">
+                {s.title}
+              </h3>
+              <ul className="space-y-2 opacity-80">
+                {s.items.map((item, j) => (
+                  <li key={j}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
-      </main>
+      </section>
+
+      {/* 💼 Projects Section */}
+      <section id="projects" className="min-h-screen px-6 py-20">
+        <h2 className="text-4xl font-bold text-center mb-12 text-[var(--accent-dark)] dark:text-[var(--accent-light)]">
+          Projects
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          {[
+            {
+              title: "Smart Expense Splitter",
+              desc: "A web application for tracking and splitting expenses among groups with real-time calculations.",
+              link: "https://github.com/Jaideep200513/smart-expense-splitter",
+              demo: "https://smart-expense-splitter-hzkh.onrender.com/",
+            },
+            {
+              title: "Dynamic Risk Tool",
+              desc: "Risk assessment and analysis tool for dynamic decision-making and management.",
+              link: "https://github.com/Jaideep200513/dynamic-risk-tool",
+              demo: "https://huggingface.co/spaces/Jaideep200513/dynamic-risk-tool?logs=container",
+            },
+          ].map((p, i) => (
+            <div
+              key={i}
+              className="bg-[var(--primary-light)] dark:bg-[var(--primary-dark)] p-6 rounded-2xl shadow-md hover:shadow-lg transition-all border border-[var(--accent-light)]/30"
+            >
+              <h3 className="text-2xl font-semibold text-[var(--accent-dark)] dark:text-[var(--accent-light)] mb-3">
+                {p.title}
+              </h3>
+              <p className="opacity-80 mb-4">{p.desc}</p>
+              <div className="flex flex-col gap-2">
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] font-medium hover:underline"
+                >
+                  View Project →
+                </a>
+                <a
+                  href={p.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] font-medium hover:underline"
+                >
+                  Live Demo →
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 🎓 Certifications Section */}
+      <section id="certifications" className="min-h-screen px-6 py-20 bg-[var(--primary-light)]/40 dark:bg-[var(--primary-dark)]/20">
+        <h2 className="text-4xl font-bold text-center mb-12 text-[var(--accent-dark)] dark:text-[var(--accent-light)]">
+          Certifications
+        </h2>
+
+        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {[
+            {
+              title: "AWS Academy Graduate – Cloud Foundations",
+              issuer: "AWS Academy via Credly",
+              date: "2025",
+              link: "https://www.credly.com/badges/f0d2f2a3-860b-48c6-a7a7-a4b0fd213cfd/public_url",
+            },
+            {
+              title: "CS50: Introduction to Computer Science",
+              issuer: "Harvard University via edX",
+              date: "2025",
+              link: "https://certificates.cs50.io/92eba02a-710b-4f68-8780-0e8b74d5193a.pdf?size=letter",
+            },
+            {
+              title: "MATLAB Fundamentals",
+              issuer: "MathWorks MATLAB Academy",
+              date: "2024",
+              link: "https://matlabacademy.mathworks.com/progress/share/certificate.html?id=2c65b8cb-ad3f-4562-8620-7b1769f91e2b&",
+            },
+          ].map((cert, i) => (
+            <div
+              key={i}
+              className="bg-[var(--primary-light)] dark:bg-[var(--primary-dark)] p-6 rounded-2xl shadow-md hover:shadow-lg transition-all border border-[var(--accent-light)]/30"
+            >
+              <h3 className="text-2xl font-semibold text-[var(--accent-dark)] dark:text-[var(--accent-light)] mb-2">
+                {cert.title}
+              </h3>
+              <p className="opacity-70 mb-1">{cert.issuer}</p>
+              <p className="opacity-60 text-sm mb-4">{cert.date}</p>
+              <a
+                href={cert.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] font-medium hover:underline"
+              >
+                View Certificate →
+              </a>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* 📞 Contact Section */}
+      <section
+        id="contact"
+        className="min-h-[60vh] flex flex-col justify-center items-center text-center px-6 bg-[var(--primary-light)]/30 dark:bg-[var(--primary-dark)]/30"
+      >
+        <h2 className="text-4xl font-bold mb-6 text-[var(--accent-dark)] dark:text-[var(--accent-light)]">
+          Get in Touch
+        </h2>
+        <p className="text-lg opacity-80 mb-6 max-w-xl">
+          Let's connect and discuss ideas, collaborations, or opportunities.
+        </p>
+
+        <div className="space-y-4 opacity-90">
+          <p>
+            📧 Email:{" "}
+            <a
+              href="mailto:jaideep.gubbala13@gmail.com"
+              className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] hover:underline"
+            >
+              jaideep.gubbala13@gmail.com
+            </a>
+          </p>
+          <p>
+            💼 LinkedIn:{" "}
+            <a
+              href="https://linkedin.com/in/jaideep-gubbala-profile"
+              target="_blank"
+              className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] hover:underline"
+            >
+              linkedin.com/in/jaideep-gubbala-profile
+            </a>
+          </p>
+          <p>
+            🐙 GitHub:{" "}
+            <a
+              href="https://github.com/Jaideep200513"
+              target="_blank"
+              className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] hover:underline"
+            >
+              github.com/Jaideep200513
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <footer className="text-center py-6 opacity-70 bg-[var(--primary-light)]/40 dark:bg-[var(--primary-dark)]/30">
+        © {new Date().getFullYear()} Jaideep. Built with ☕ + Next.js
+      </footer>
     </div>
   );
 }
