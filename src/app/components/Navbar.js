@@ -73,7 +73,7 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {/* Custom Button */}
           <a
-            href="/resume.pdf"
+            href="https://flowcv.com/resume/9wscdkl8bsqo"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:block border border-[var(--accent-dark)] dark:border-[var(--accent-light)] text-[var(--accent-dark)] dark:text-[var(--accent-light)] px-4 py-2 rounded-lg hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition-all font-medium"

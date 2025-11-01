@@ -149,10 +149,10 @@ export default function HomePage() {
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {[
             {
-              title: "AWS Academy Graduate – Cloud Foundations",
+              title: "AWS Academy Graduate – Cloud Architecting",
               issuer: "AWS Academy via Credly",
               date: "2025",
-              link: "https://www.credly.com/badges/f0d2f2a3-860b-48c6-a7a7-a4b0fd213cfd/public_url",
+              link: "https://www.credly.com/badges/3c8d9bde-26ee-4477-90c6-c69523018136/public_url",
             },
             {
               title: "CS50: Introduction to Computer Science",
