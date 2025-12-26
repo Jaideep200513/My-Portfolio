@@ -36,19 +36,24 @@ export default function Navbar() {
     localStorage.setItem("theme", next ? "dark" : "light");
   };
 
-  /* Scroll spy + auto close */
+  /* ✅ FIXED Scroll Spy + Auto Close (ONLY CHANGE) */
   useEffect(() => {
     const onScroll = () => {
       if (open) setOpen(false);
 
-      let current = "home";
-      links.forEach((link) => {
-        const el = document.getElementById(link.id);
-        if (el && window.scrollY >= el.offsetTop - 120) {
-          current = link.id;
+      const scrollPos = window.scrollY + 150;
+
+      for (let i = links.length - 1; i >= 0; i--) {
+        const section = document.getElementById(links[i].id);
+        if (
+          section &&
+          scrollPos >= section.offsetTop &&
+          scrollPos < section.offsetTop + section.offsetHeight
+        ) {
+          setActive(links[i].id);
+          break;
         }
-      });
-      setActive(current);
+      }
     };
 
     window.addEventListener("scroll", onScroll);
