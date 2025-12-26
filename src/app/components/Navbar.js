@@ -1,40 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, FileText } from "lucide-react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [mounted, setMounted] = useState(false);
-
-  // Prevent hydration mismatch
-  useEffect(() => {
-    setMounted(true);
-    const storedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const isDark = storedTheme === "dark" || (!storedTheme && prefersDark);
-
-    if (isDark) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-    setDarkMode(isDark);
-  }, []);
-
-  const toggleDarkMode = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    
-    if (newMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  };
+  const [active, setActive] = useState("home");
+  const [touchStart, setTouchStart] = useState(null);
 
   const links = [
     { id: "home", label: "Home" },
@@ -45,85 +19,137 @@ export default function Navbar() {
     { id: "contact", label: "Contact" },
   ];
 
-  // Prevent flash of unstyled content
+  /* Theme */
+  useEffect(() => {
+    setMounted(true);
+    const stored = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = stored === "dark" || (!stored && prefersDark);
+    document.documentElement.classList.toggle("dark", isDark);
+    setDarkMode(isDark);
+  }, []);
+
+  const toggleDarkMode = () => {
+    const next = !darkMode;
+    setDarkMode(next);
+    document.documentElement.classList.toggle("dark", next);
+    localStorage.setItem("theme", next ? "dark" : "light");
+  };
+
+  /* Scroll spy + auto close */
+  useEffect(() => {
+    const onScroll = () => {
+      if (open) setOpen(false);
+
+      let current = "home";
+      links.forEach((link) => {
+        const el = document.getElementById(link.id);
+        if (el && window.scrollY >= el.offsetTop - 120) {
+          current = link.id;
+        }
+      });
+      setActive(current);
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
+
+  /* Swipe to close */
+  const onTouchStart = (e) => setTouchStart(e.touches[0].clientY);
+  const onTouchEnd = (e) => {
+    if (!touchStart) return;
+    const diff = e.changedTouches[0].clientY - touchStart;
+    if (diff < -50) setOpen(false);
+    setTouchStart(null);
+  };
+
   if (!mounted) return null;
 
   return (
-    <nav className="fixed w-full top-0 left-0 bg-[var(--primary-light)]/80 dark:bg-[var(--primary-light)]/10 backdrop-blur-md shadow-lg z-50 transition-all border-b border-[var(--accent-light)]/20">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-[var(--primary-light)]/90 dark:bg-[var(--primary-light)]/10 backdrop-blur-md border-b border-[var(--accent-light)]/20">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-[var(--accent-dark)] dark:text-[var(--accent-light)] tracking-wide">
+        <h1 className="text-2xl font-bold text-[var(--accent-dark)] dark:text-[var(--accent-light)]">
           Jaideep Gubbala
         </h1>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-10 text-[var(--foreground)]/80 dark:text-[var(--foreground-dark)]/90 font-medium">
-          {links.map((link) => (
-            <li key={link.id}>
+        <ul className="hidden md:flex space-x-10 font-medium">
+          {links.map((l) => (
+            <li key={l.id}>
               <a
-                href={`#${link.id}`}
-                className="hover:text-[var(--accent-dark)] dark:hover:text-[var(--accent-light)] transition-colors"
+                href={`#${l.id}`}
+                className={`transition ${
+                  active === l.id
+                    ? "text-[var(--accent-dark)] dark:text-[var(--accent-light)]"
+                    : "text-[var(--foreground)] dark:text-[var(--foreground-dark)] hover:text-[var(--accent-dark)]"
+                }`}
               >
-                {link.label}
+                {l.label}
               </a>
             </li>
           ))}
         </ul>
 
-        {/* Right Buttons */}
+        {/* Controls */}
         <div className="flex items-center gap-4">
-          {/* Custom Button */}
           <a
             href="https://flowcv.com/resume/9wscdkl8bsqo"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:block border border-[var(--accent-dark)] dark:border-[var(--accent-light)] text-[var(--accent-dark)] dark:text-[var(--accent-light)] px-4 py-2 rounded-lg hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition-all font-medium"
+            className="hidden md:inline-flex items-center gap-2 border border-[var(--accent-dark)] dark:border-[var(--accent-light)] px-4 py-2 rounded-lg text-[var(--accent-dark)] dark:text-[var(--accent-light)] hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition"
           >
-            Resume
+            <FileText size={18} /> Resume
           </a>
 
-          {/* 🌙 Dark Mode Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] p-2 hover:bg-[var(--accent-light)]/20 dark:hover:bg-[var(--accent-light)]/10 rounded-lg transition-all"
-            aria-label="Toggle dark mode"
-          >
+          <button onClick={toggleDarkMode} className="p-2 rounded-lg">
             {darkMode ? <Sun size={22} /> : <Moon size={22} />}
           </button>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setOpen(!open)}
-              className="text-[var(--accent-dark)] dark:text-[var(--accent-light)]"
-              aria-label="Toggle menu"
-            >
-              {open ? <X size={26} /> : <Menu size={26} />}
-            </button>
-          </div>
+          <button onClick={() => setOpen(!open)} className="md:hidden">
+            {open ? <X size={26} /> : <Menu size={26} />}
+          </button>
         </div>
       </div>
 
-      {/* 📱 Mobile Dropdown */}
+      {/* Mobile Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="bg-[var(--primary-light)]/90 dark:bg-[var(--primary-light)]/10 backdrop-blur-md md:hidden shadow-inner"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            onTouchStart={onTouchStart}
+            onTouchEnd={onTouchEnd}
+            className="md:hidden bg-[var(--primary-light)] dark:bg-[#0b0b0b] border-t border-[var(--accent-light)]/20"
           >
-            <ul className="flex flex-col space-y-4 p-6 text-center text-[var(--foreground)]/90 dark:text-[var(--foreground-dark)]/90 font-medium">
-              {links.map((link) => (
-                <li key={link.id}>
+            <ul className="flex flex-col gap-5 p-6 text-center font-medium">
+              {links.map((l) => (
+                <li key={l.id}>
                   <a
-                    href={`#${link.id}`}
+                    href={`#${l.id}`}
                     onClick={() => setOpen(false)}
-                    className="block hover:text-[var(--accent-dark)] dark:hover:text-[var(--accent-light)] transition-colors"
+                    className={`block transition ${
+                      active === l.id
+                        ? "text-[var(--accent-dark)] dark:text-[var(--accent-light)]"
+                        : "text-[var(--foreground)] dark:text-[var(--foreground-dark)] hover:text-[var(--accent-dark)]"
+                    }`}
                   >
-                    {link.label}
+                    {l.label}
                   </a>
                 </li>
               ))}
+
+              <a
+                href="https://flowcv.com/resume/9wscdkl8bsqo"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setOpen(false)}
+                className="mt-4 inline-flex items-center justify-center gap-2 border border-[var(--accent-dark)] dark:border-[var(--accent-light)] px-5 py-2 rounded-lg hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition"
+              >
+                <FileText size={18} /> Resume
+              </a>
             </ul>
           </motion.div>
         )}
