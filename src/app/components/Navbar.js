@@ -8,6 +8,7 @@ export default function Navbar() {
   const [darkMode, setDarkMode] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
     const storedTheme = localStorage.getItem("theme");
@@ -44,18 +45,7 @@ export default function Navbar() {
     { id: "contact", label: "Contact" },
   ];
 
-  const handleLinkClick = (e, id) => {
-    e.preventDefault();
-    setOpen(false);
-    
-    setTimeout(() => {
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }, 100);
-  };
-
+  // Prevent flash of unstyled content
   if (!mounted) return null;
 
   return (
@@ -65,6 +55,7 @@ export default function Navbar() {
           Jaideep Gubbala
         </h1>
 
+        {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-10 text-[var(--foreground)]/80 dark:text-[var(--foreground-dark)]/90 font-medium">
           {links.map((link) => (
             <li key={link.id}>
@@ -78,7 +69,9 @@ export default function Navbar() {
           ))}
         </ul>
 
+        {/* Right Buttons */}
         <div className="flex items-center gap-4">
+          {/* Custom Button */}
           <a
             href="https://flowcv.com/resume/9wscdkl8bsqo"
             target="_blank"
@@ -88,18 +81,20 @@ export default function Navbar() {
             Resume
           </a>
 
+          {/* 🌙 Dark Mode Toggle */}
           <button
             onClick={toggleDarkMode}
-            className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] p-2 hover:bg-[var(--accent-light)]/20 dark:hover:bg-[var(--accent-light)]/10 rounded-lg transition-all touch-manipulation"
+            className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] p-2 hover:bg-[var(--accent-light)]/20 dark:hover:bg-[var(--accent-light)]/10 rounded-lg transition-all"
             aria-label="Toggle dark mode"
           >
             {darkMode ? <Sun size={22} /> : <Moon size={22} />}
           </button>
 
+          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button
               onClick={() => setOpen(!open)}
-              className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] touch-manipulation"
+              className="text-[var(--accent-dark)] dark:text-[var(--accent-light)]"
               aria-label="Toggle menu"
             >
               {open ? <X size={26} /> : <Menu size={26} />}
@@ -108,22 +103,22 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* 📱 Mobile Dropdown */}
       <AnimatePresence>
         {open && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="bg-[var(--primary-light)]/90 dark:bg-[var(--primary-light)]/10 backdrop-blur-md md:hidden shadow-inner overflow-hidden"
+            className="bg-[var(--primary-light)]/90 dark:bg-[var(--primary-light)]/10 backdrop-blur-md md:hidden shadow-inner"
           >
             <ul className="flex flex-col space-y-4 p-6 text-center text-[var(--foreground)]/90 dark:text-[var(--foreground-dark)]/90 font-medium">
               {links.map((link) => (
                 <li key={link.id}>
                   <a
                     href={`#${link.id}`}
-                    onClick={(e) => handleLinkClick(e, link.id)}
-                    className="block hover:text-[var(--accent-dark)] dark:hover:text-[var(--accent-light)] transition-colors py-2 touch-manipulation cursor-pointer"
+                    onClick={() => setOpen(false)}
+                    className="block hover:text-[var(--accent-dark)] dark:hover:text-[var(--accent-light)] transition-colors"
                   >
                     {link.label}
                   </a>
