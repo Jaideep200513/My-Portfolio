@@ -36,24 +36,24 @@ export default function Navbar() {
     localStorage.setItem("theme", next ? "dark" : "light");
   };
 
-  /* ✅ FIXED Scroll Spy + Auto Close (ONLY CHANGE) */
+  /* ✅ FINAL Scroll Spy (Last-section safe) */
   useEffect(() => {
     const onScroll = () => {
       if (open) setOpen(false);
 
       const scrollPos = window.scrollY + 150;
+      let current = links[0].id;
 
-      for (let i = links.length - 1; i >= 0; i--) {
+      for (let i = 0; i < links.length; i++) {
         const section = document.getElementById(links[i].id);
-        if (
-          section &&
-          scrollPos >= section.offsetTop &&
-          scrollPos < section.offsetTop + section.offsetHeight
-        ) {
-          setActive(links[i].id);
-          break;
+        if (!section) continue;
+
+        if (scrollPos >= section.offsetTop) {
+          current = links[i].id;
         }
       }
+
+      setActive(current);
     };
 
     window.addEventListener("scroll", onScroll);
@@ -102,16 +102,22 @@ export default function Navbar() {
             href="https://flowcv.com/resume/9wscdkl8bsqo"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:inline-flex items-center gap-2 border border-[var(--accent-dark)] dark:border-[var(--accent-light)] px-4 py-2 rounded-lg text-[var(--accent-dark)] dark:text-[var(--accent-light)] hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition"
+            className="hidden md:inline-flex items-center gap-2 border border-[var(--accent-dark)] dark:border-[var(--accent-light)] px-4 py-2 rounded-lg text-[var(--accent-dark)] dark:text-[var(--accent-light)] hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition cursor-pointer"
           >
             <FileText size={18} /> Resume
           </a>
 
-          <button onClick={toggleDarkMode} className="p-2 rounded-lg">
+          <button
+            onClick={toggleDarkMode}
+            className="p-2 rounded-lg cursor-pointer"
+          >
             {darkMode ? <Sun size={22} /> : <Moon size={22} />}
           </button>
 
-          <button onClick={() => setOpen(!open)} className="md:hidden">
+          <button
+            onClick={() => setOpen(!open)}
+            className="md:hidden cursor-pointer"
+          >
             {open ? <X size={26} /> : <Menu size={26} />}
           </button>
         </div>
@@ -151,7 +157,7 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setOpen(false)}
-                className="mt-4 inline-flex items-center justify-center gap-2 border border-[var(--accent-dark)] dark:border-[var(--accent-light)] px-5 py-2 rounded-lg hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition"
+                className="mt-4 inline-flex items-center justify-center gap-2 border border-[var(--accent-dark)] dark:border-[var(--accent-light)] px-5 py-2 rounded-lg hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition cursor-pointer"
               >
                 <FileText size={18} /> Resume
               </a>

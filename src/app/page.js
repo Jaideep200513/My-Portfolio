@@ -192,7 +192,7 @@ export default function HomePage() {
       {/* 📞 Contact Section */}
       <section
         id="contact"
-        className="min-h-[60vh] flex flex-col justify-center items-center text-center px-6 bg-[var(--primary-light)]/30 dark:bg-[var(--primary-dark)]/30"
+        className="scroll-mt-28 min-h-screen flex flex-col justify-center items-center text-center px-6 bg-[var(--primary-light)]/30 dark:bg-[var(--primary-dark)]/30"
       >
         <h2 className="text-4xl font-bold mb-6 text-[var(--accent-dark)] dark:text-[var(--accent-light)]">
           Get in Touch
