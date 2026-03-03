@@ -15,7 +15,7 @@ export default function HomePage() {
           Hi, I'm Jaideep 👋
         </h1>
         <p className="text-lg md:text-xl max-w-2xl leading-relaxed opacity-80">
-          Cloud & AI/ML Enthusiast | Full Stack Developer | Lifelong Learner
+          Software Engineer | Backend & Cloud Enthusiast
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <a
@@ -49,14 +49,15 @@ export default function HomePage() {
         </h2>
         <div className="max-w-4xl mx-auto text-lg leading-relaxed text-center opacity-90">
           <p>
-            I'm a B.Tech CSE student passionate about building intelligent systems and scalable cloud solutions.
-            I enjoy working on projects involving <b>AI, ML, Cloud, and Full Stack Development</b>.
-            My focus is on creating clean, efficient, and user-centric applications that solve real-world problems.
+            Computer Science undergraduate with strong problem-solving skills and
+            a solid foundation in core CS concepts. Passionate about building
+            scalable backend systems and cloud-based applications, with hands-on
+            experience in developing and deploying real-world projects.
           </p>
         </div>
       </section>
 
-      {/* ⚙️ Skills Section */}
+            {/* ⚙️ Skills Section */}
       <section
         id="skills"
         className="min-h-[80vh] px-6 py-20 bg-[var(--primary-light)]/40 dark:bg-[var(--primary-dark)]/20"
@@ -67,9 +68,38 @@ export default function HomePage() {
 
         <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
           {[
-            { title: "Cloud & DevOps", items: ["AWS", "Docker", "CI/CD", "EC2", "S3", "Lambda"] },
-            { title: "AI / ML", items: ["Python", "Pandas", "Scikit-learn", "TensorFlow", "OpenCV"] },
-            { title: "Web Development", items: ["Next.js", "React", "Flask", "Node.js", "Tailwind CSS"] },
+            {
+              title: "Languages",
+              items: ["Java", "C++", "Python", "SQL"],
+            },
+            {
+              title: "Core Competencies",
+              items: [
+                "Data Structures & Algorithms",
+                "OOP",
+                "Operating Systems",
+                "Computer Networks",
+                "DBMS",
+              ],
+            },
+            {
+              title: "Database",
+              items: ["MySQL", "MongoDB"],
+            },
+            {
+              title: "Cloud & DevOps",
+              items: ["AWS", "Git & GitHub", "Linux"],
+            },
+            {
+              title: "Web Development",
+              items: [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Node.js",
+                "REST APIs",
+              ],
+            },
           ].map((s, i) => (
             <div
               key={i}
@@ -98,13 +128,15 @@ export default function HomePage() {
           {[
             {
               title: "Smart Expense Splitter",
-              desc: "A web application for tracking and splitting expenses among groups with real-time calculations.",
+              desc:
+                "Designed and developed a full-stack Flask + SQLite expense management application with a responsive UI. Hosted a live demo on Render.",
               link: "https://github.com/Jaideep200513/smart-expense-splitter",
               demo: "https://smart-expense-splitter-hzkh.onrender.com/",
             },
             {
-              title: "Dynamic Risk Tool",
-              desc: "Risk assessment and analysis tool for dynamic decision-making and management.",
+              title: "Dynamic Risk Assessment Tool",
+              desc:
+                "Developed a web tool with a Flask backend and responsive HTML/CSS/JavaScript frontend to assess project risks and predict bottlenecks. Hosted live demo on Hugging Face Spaces.",
               link: "https://github.com/Jaideep200513/dynamic-risk-tool",
               demo: "https://huggingface.co/spaces/Jaideep200513/dynamic-risk-tool?logs=container",
             },
@@ -214,11 +246,11 @@ export default function HomePage() {
           <p>
             💼 LinkedIn:{" "}
             <a
-              href="https://linkedin.com/in/jaideep-gubbala-profile"
+              href="https://www.linkedin.com/in/jaideep-gubbala-7460a43b1/"
               target="_blank"
               className="text-[var(--accent-dark)] dark:text-[var(--accent-light)] hover:underline"
             >
-              linkedin.com/in/jaideep-gubbala-profile
+              LinkedIn Profile
             </a>
           </p>
           <p>
@@ -231,11 +263,12 @@ export default function HomePage() {
               github.com/Jaideep200513
             </a>
           </p>
+          <p>📍 Location: Hyderabad, India</p>
         </div>
       </section>
 
       <footer className="text-center py-6 opacity-70 bg-[var(--primary-light)]/40 dark:bg-[var(--primary-dark)]/30">
-        © {new Date().getFullYear()} Jaideep. Built with ☕ + Next.js
+        © {new Date().getFullYear()} Jaideep Gubbala. Built with ☕ + Next.js
       </footer>
     </div>
   );
