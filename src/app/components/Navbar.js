@@ -5,7 +5,7 @@ import { Menu, X, Sun, Moon, FileText } from "lucide-react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [mounted, setMounted] = useState(false);
   const [active, setActive] = useState("home");
   const [touchStart, setTouchStart] = useState(null);
@@ -19,12 +19,11 @@ export default function Navbar() {
     { id: "contact", label: "Contact" },
   ];
 
-  /* Theme */
+  /* Theme — default to dark */
   useEffect(() => {
     setMounted(true);
     const stored = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const isDark = stored === "dark" || (!stored && prefersDark);
+    const isDark = stored !== "light"; // dark unless user explicitly chose light
     document.documentElement.classList.toggle("dark", isDark);
     setDarkMode(isDark);
   }, []);

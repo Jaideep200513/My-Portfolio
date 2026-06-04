@@ -5,7 +5,19 @@
   --primary-light: #d4a574;
   --accent-light: #8b5a3c;
   --accent-dark: #5c3a21;
-  --foreground: #2d1810;
+  --foreground: #1a0e08;
+  --foreground-secondary: #4a2e1a;
+  --foreground-muted: #6b4530;
+  --link: #c4622d;
+
+  /* ── Form input tokens (light theme) ── */
+  --input-bg: #EEEEEE;
+  --input-text: #1a0e08;
+  --input-placeholder: #8b6a52;
+  --input-border: #b8855a;
+
+  /* Tell the browser: render native controls in light mode */
+  color-scheme: light;
 }
 
 /* 🌙 Dark Theme - This applies when .dark class is on <html> */
@@ -14,7 +26,19 @@
   --primary-light: #242424;
   --accent-light: #d6b88c;
   --accent-dark: #d6b88c;
-  --foreground: #f2f2f2;
+  --foreground: #ffffff;
+  --foreground-secondary: #f0f0f0;
+  --foreground-muted: #c8c8c8;
+  --link: #f5c88a;
+
+  /* ── Form input tokens (dark theme) ── */
+  --input-bg: #1a1a1a;
+  --input-text: #ffffff;
+  --input-placeholder: #c8c8c8;
+  --input-border: rgba(214, 184, 140, 0.35);
+
+  /* Tell the browser: render native controls in dark mode */
+  color-scheme: dark;
 }
 
 body {
@@ -25,4 +49,17 @@ body {
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Smooth theme transitions on form inputs */
+input,
+textarea {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+/* Placeholder color driven by theme token */
+input::placeholder,
+textarea::placeholder {
+  color: var(--input-placeholder);
+  opacity: 1;
 }
