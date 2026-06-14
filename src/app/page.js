@@ -159,6 +159,12 @@ export default function HomePage() {
               link: "https://github.com/Jaideep200513/dynamic-risk-tool",
               demo: "https://huggingface.co/spaces/Jaideep200513/dynamic-risk-tool?logs=container",
             },
+            {
+              title: "LeetBridge",
+              desc: "A Chrome extension that automatically syncs LeetCode solutions to GitHub repositories with language and difficulty-aware organization.",
+              link: "https://github.com/Jaideep200513/leetbridge",
+              demo: "https://youtu.be/87wHSTiaAfA",
+            },
           ].map((p, i) => (
             <AnimatedSection key={i} variant="fade-up" delay={i * 0.15}>
               <FloatCard className="bg-[var(--primary-light)] dark:bg-[var(--primary-dark)] p-6 rounded-2xl shadow-md border border-[var(--accent-light)]/30 h-full">
