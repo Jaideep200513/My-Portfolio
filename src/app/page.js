@@ -227,6 +227,12 @@ export default function HomePage() {
               date: "2024",
               link: "https://matlabacademy.mathworks.com/progress/share/certificate.html?id=2c65b8cb-ad3f-4562-8620-7b1769f91e2b&",
             },
+            {
+              title: "DevOps, Agile and Design Thinking",
+              issuer: "IBM Career Education Program",
+              date: "2026",
+              link: "https://courses.ibmcep.cognitiveclass.ai/certificates/66e1535aaeb0447f81d1cca0c94140f6",
+            },
           ].map((cert, i) => (
             <AnimatedSection key={i} variant="scale-in" delay={i * 0.12}>
               <FloatCard className="bg-[var(--primary-light)] dark:bg-[var(--primary-dark)] p-6 rounded-2xl shadow-md border border-[var(--accent-light)]/30 h-full">

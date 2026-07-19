@@ -98,7 +98,7 @@ export default function Navbar() {
         {/* Controls */}
         <div className="flex items-center gap-4">
           <a
-            href="https://flowcv.com/resume/9wscdkl8bsqo"
+            href="https://drive.google.com/file/d/1sPwP40Us6nP5LBh3WvDn71Cnw7CC6Y-a/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="hidden md:inline-flex items-center gap-2 border border-[var(--accent-dark)] dark:border-[var(--accent-light)] px-4 py-2 rounded-lg text-[var(--accent-dark)] dark:text-[var(--accent-light)] hover:bg-[var(--accent-dark)] dark:hover:bg-[var(--accent-light)] hover:text-white dark:hover:text-black transition cursor-pointer"
