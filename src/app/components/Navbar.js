@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon, FileText } from "lucide-react";
 
@@ -9,6 +9,7 @@ export default function Navbar() {
   const [mounted, setMounted] = useState(false);
   const [active, setActive] = useState("home");
   const [touchStart, setTouchStart] = useState(null);
+  const toggleBtnRef = useRef(null);
 
   const links = [
     { id: "home", label: "Home" },
@@ -30,9 +31,51 @@ export default function Navbar() {
 
   const toggleDarkMode = () => {
     const next = !darkMode;
-    setDarkMode(next);
-    document.documentElement.classList.toggle("dark", next);
-    localStorage.setItem("theme", next ? "dark" : "light");
+
+    // --- View Transitions API ripple animation ---
+    if (!document.startViewTransition) {
+      // Fallback for unsupported browsers
+      setDarkMode(next);
+      document.documentElement.classList.toggle("dark", next);
+      localStorage.setItem("theme", next ? "dark" : "light");
+      return;
+    }
+
+    // Compute ripple origin from button position
+    const btn = toggleBtnRef.current;
+    const rect = btn ? btn.getBoundingClientRect() : { left: window.innerWidth / 2, top: window.innerHeight / 2, width: 0, height: 0 };
+    const x = Math.round(rect.left + rect.width / 2);
+    const y = Math.round(rect.top + rect.height / 2);
+
+    // Max radius to cover the entire viewport
+    const endRadius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y)
+    );
+
+    const transition = document.startViewTransition(() => {
+      setDarkMode(next);
+      document.documentElement.classList.toggle("dark", next);
+      localStorage.setItem("theme", next ? "dark" : "light");
+    });
+
+    transition.ready.then(() => {
+      // Always animate the NEW snapshot expanding from a circle to cover the screen.
+      // This guarantees the ripple effect works in both light→dark and dark→light.
+      document.documentElement.animate(
+        {
+          clipPath: [
+            `circle(0px at ${x}px ${y}px)`,
+            `circle(${endRadius}px at ${x}px ${y}px)`,
+          ],
+        },
+        {
+          duration: 700,
+          easing: "ease-in-out",
+          pseudoElement: "::view-transition-new(root)",
+        }
+      );
+    });
   };
 
   /* ✅ FINAL Scroll Spy (Last-section safe) */
@@ -107,8 +150,10 @@ export default function Navbar() {
           </a>
 
           <button
+            ref={toggleBtnRef}
             onClick={toggleDarkMode}
-            className="p-2 rounded-lg cursor-pointer"
+            className="p-2 rounded-lg cursor-pointer transition-transform hover:scale-110 active:scale-95"
+            aria-label="Toggle theme"
           >
             {darkMode ? <Sun size={22} /> : <Moon size={22} />}
           </button>

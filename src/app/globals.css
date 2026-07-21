@@ -63,3 +63,19 @@ textarea::placeholder {
   color: var(--input-placeholder);
   opacity: 1;
 }
+
+/* ── View Transitions API – theme ripple ── */
+/* Suppress the default browser crossfade so our clip-path animation runs solo */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* The "old" snapshot stays fully visible underneath while the new one clips in */
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 9999;
+}
